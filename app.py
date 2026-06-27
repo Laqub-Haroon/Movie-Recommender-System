@@ -26,7 +26,15 @@ def recommend(movie):
 movies_dict = pickle.load(open('movie_dict.pkl','rb'))
 movies = pd.DataFrame(movies_dict)
 
-similarity = pickle.load(open('similarity.pkl','rb'))
+import gdown
+import os
+
+# NEW - download from Google Drive if not already present
+if not os.path.exists('similarity.pkl'):
+    url = 'https://drive.google.com/file/d/1RzXx7ZJBAalsKgfrH7HKGzOWOaYfhmrz/view'
+    gdown.download(url, 'similarity.pkl', quiet=False)
+
+similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 st.title('Movie Recommender System')
 
